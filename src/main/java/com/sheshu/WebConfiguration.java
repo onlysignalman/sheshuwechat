@@ -1,6 +1,8 @@
 package com.sheshu;
 
 import com.github.pagehelper.PageHelper;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,8 @@ import java.util.Properties;
 @MapperScan("com.sheshu.*.mapper")
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 
+    private static Log log = LogFactory.getLog(WebConfiguration.class);
+
     //视图解析器
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -28,6 +32,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     //分页助手
     @Bean
     public PageHelper pagehelper(){
+        log.info("注册MyBatis分页插件PageHelper");
         PageHelper pageHelper = new PageHelper();
         Properties p = new Properties();
 //        设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用,该参数默认为false,和startPage中的pageNum效果一样
